@@ -1,3 +1,3 @@
 # form_login
 
-A new Flutter project.
+A small form demo made in flutter
