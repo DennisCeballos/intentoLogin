@@ -61,15 +61,14 @@ class _RegisterFormState extends State<RegisterForm> {
                     ScaffoldMessenger.of(context).showSnackBar(
                       const SnackBar(content: Text('Aquí nos conectamos con la base de datos o algo...')),
                     );
+                    _formKey.currentState?.save();
+                    context.go('/home/${controllerText.value.text}');
                   }
-                   _formKey.currentState?.save();
-                  context.go('/home/${controllerText.value.text}');
                 },
                 child: const Text('Registrarse'),
               ),
             ),
           ],
-      
         ),
       ),
     );

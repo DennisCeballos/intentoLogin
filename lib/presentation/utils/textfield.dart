@@ -7,11 +7,13 @@ class TextFormWrapper extends StatefulWidget {
     required this.controller,
     required this.tipoTeclado,
     this.password = false,
+    this.icon = const Icon(Icons.person, size: 24),
     required this.titulo,
     required this.hintTexto,
     required this.validador
   });
 
+  final Icon icon;
   final TextInputType tipoTeclado;
   final bool password;
   final String titulo;
@@ -27,10 +29,10 @@ class _TextFormWrapperState extends State<TextFormWrapper> {
   
   final _textFieldFocusNode = FocusNode();
   late bool _obscured = true;
-  String? value;
+  String? _value;
 
   String? getValue(){
-    return value;
+    return _value;
   }
 
   void _toggleObscured(){
@@ -57,14 +59,11 @@ class _TextFormWrapperState extends State<TextFormWrapper> {
       focusNode: _textFieldFocusNode,
       decoration: InputDecoration(
         floatingLabelBehavior: FloatingLabelBehavior.never, 
-        hintText: widget.hintTexto,
-        hintStyle: textTheme.displayMedium?.copyWith(fontSize: size), 
+        hintText: widget.titulo,
+        hintStyle: textTheme.labelSmall, 
         filled: true, 
         fillColor: Colors.white, 
-        isDense: false, 
-        prefixIcon: widget.password
-            ? const Icon(Icons.lock_outline_rounded, size: 24)
-            : const Icon(Icons.person, size: 24),
+        isDense: false,
         suffixIcon: widget.password
             ? Padding(
                 padding: const EdgeInsets.fromLTRB(0, 0, 4, 0),
@@ -83,7 +82,7 @@ class _TextFormWrapperState extends State<TextFormWrapper> {
       validator: widget.validador,
       onTap: _handleTap,
       onTapOutside: _handleTapOutside,
-      onSaved: (txt) {value = txt;}
+      onSaved: (txt) {_value = txt;}
     );
   }
 
@@ -93,11 +92,6 @@ class _TextFormWrapperState extends State<TextFormWrapper> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          widget.titulo,
-          style: textTheme.displayMedium?.copyWith(fontSize: size),     
-        ),
-        const SizedBox(height: 4),
         _passwordCheck(textTheme)
       ],
     );

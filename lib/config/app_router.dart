@@ -19,7 +19,7 @@ final approuter = GoRouter(
       path: '/home/:dni',
       name: HomeUI.name,
       builder: (context, state) => HomeUI(
-        dni: state.pathParameters['dni']!
+        usuario: state.pathParameters['dni']!
       ),
     )
   ]
